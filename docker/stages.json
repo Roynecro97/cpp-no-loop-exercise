@@ -1,0 +1,205 @@
+{
+    "stage1": {
+        "desc": "Print all elements in the container, each in a new line",
+        "includes": [
+            "list"
+        ],
+        "container_type": "list<int>",
+        "container_name": "ints",
+        "element_type": "int",
+        "examples": 1,
+        "test_cases": [
+            {
+                "name": "4 numbers",
+                "input": "10 20 30 40",
+                "output": "10\n20\n30\n40"
+            },
+            {
+                "name": "1 number",
+                "input": "510",
+                "output": "510"
+            },
+            {
+                "name": "0 numbers",
+                "input": "",
+                "output": ""
+            }
+        ]
+    },
+    "stage2": {
+        "desc": "Calculate the average of the values in the vector",
+        "includes": [
+            "vector"
+        ],
+        "container_type": "vector<int>",
+        "container_name": "ints",
+        "element_type": "int",
+        "examples": 1,
+        "test_cases": [
+            {
+                "name": "4 numbers",
+                "input": "10 20 30 40",
+                "output": "25"
+            },
+            {
+                "name": "5 numbers",
+                "input": "1 2 3 4 5",
+                "output": "3"
+            },
+            {
+                "name": "2 numbers",
+                "input": "5 8",
+                "output": "6"
+            },
+            {
+                "name": "100 numbers",
+                "input": "68 51 91 119 19 48 29 121 46 154 135 62 76 106 47 162 189 111 113 154 145 -6 167 2 95 21 122 113 96 71 8 162 127 77 156 28 17 -4 178 48 85 120 155 128 23 54 81 98 66 69 78 196 7 22 109 5 85 154 200 153 183 98 110 135 129 157 197 165 36 92 131 189 125 31 35 84 -8 0 183 189 176 180 129 152 53 8 124 68 89 81 81 64 176 56 47 113 145 2 116 120",
+                "output": "96"
+            },
+            {
+                "name": "1 number",
+                "input": "510",
+                "output": "510"
+            },
+            {
+                "name": "negative average",
+                "input": "-10 2",
+                "output": "-4"
+            }
+        ]
+    },
+    "stage3": {
+        "desc": "Print all of the words in the container, separated by comma (Python: ', '.join(words))",
+        "includes": [
+            "vector",
+            "string"
+        ],
+        "container_type": "vector<string>",
+        "container_name": "words",
+        "element_type": "string",
+        "examples": 1,
+        "test_cases": [
+            {
+                "name": "fruits",
+                "input": "apple banana pineapple mango",
+                "output": "apple, banana, pineapple, mango"
+            },
+            {
+                "name": "lorem ipsum",
+                "input": "Esse deserunt tempor ipsum ipsum anim excepteur esse excepteur nulla est Lorem in amet voluptate",
+                "output": "Esse, deserunt, tempor, ipsum, ipsum, anim, excepteur, esse, excepteur, nulla, est, Lorem, in, amet, voluptate"
+            },
+            {
+                "name": "nothing",
+                "input": "",
+                "output": ""
+            },
+            {
+                "name": "1 word",
+                "input": "C++",
+                "output": "C++"
+            }
+        ]
+    },
+    "stage4": {
+        "desc": "Check if every value in the vector is at least twice as big as the previous value (ints[i] * 2 <= ints[i + 1]).\nIf they are, print \"OK\". If not print \"BAD\".",
+        "includes": [
+            "vector",
+            "cstdint"
+        ],
+        "container_type": "vector<uint64_t>",
+        "container_name": "ints",
+        "element_type": "uint64_t",
+        "examples": 2,
+        "test_cases": [
+            {
+                "name": "simple",
+                "input": "1 2 5 10",
+                "output": "OK"
+            },
+            {
+                "name": "bad",
+                "input": "1 2 3 4",
+                "output": "BAD"
+            },
+            {
+                "name": "not rising",
+                "input": "10 20 5 46",
+                "output": "BAD"
+            },
+            {
+                "name": "many numbers",
+                "input": "9 24 48 103 214 428 856 1712 3433 6873 13746 27493 54986 109972 219954 439918 879840 1759682 3519374 7038748 14077496 28155001 56310012 112620028 225240057 450480124 900960250 1801920508 3603841024 7207682048 14415364096 28830728198 57661456396 115322912799 230645825606 461291651212 922583302430 1845166604860 3690333209720 7380666419450 14761332838908 29522665677816 59045331355632 118090662711270 236181325422540 472362650845080 944725301690160 1889450603380320 3778901206760644 7557802413521288 15115604827042580 30231209654085167 60462419308170341 120924838616340685 241849677232681370 483699354465362746 967398708930725492 1934797417861450989 3869594835722901984 7739189671445803968",
+                "output": "OK"
+            },
+            {
+                "name": "single",
+                "input": "36",
+                "output": "OK"
+            },
+            {
+                "name": "empty",
+                "input": "",
+                "output": "OK"
+            },
+            {
+                "name": "bad first value",
+                "input": "5 8 16 32",
+                "output": "BAD"
+            },
+            {
+                "name": "bad last value",
+                "input": "10 20 80 46",
+                "output": "BAD"
+            }
+        ]
+    },
+    "stage5": {
+        "desc": "Print the word that contains the highest amount of vowels (\"aeiou\").",
+        "includes": [
+            "vector",
+            "string"
+        ],
+        "container_type": "vector<string>",
+        "container_name": "words",
+        "element_type": "string",
+        "examples": 2,
+        "test_cases": [
+            {
+                "name": "simple",
+                "input": "hello world",
+                "output": "hello"
+            },
+            {
+                "name": "caps",
+                "input": "HELLO WORLD",
+                "output": "HELLO"
+            },
+            {
+                "name": "mixed",
+                "input": "DolOre lAborE doloR nISi lAbORum ut cUpiDatAt teMpoR alIQuIp FuGiAt",
+                "output": "cUpiDatAt"
+            },
+            {
+                "name": "some words",
+                "input": "Ut incididunt adipisicing eu et deserunt consectetur enim ullamco magna cillum tempor enim fugiat incididunt",
+                "output": "adipisicing"
+            },
+            {
+                "name": "no vowels",
+                "input": "Mnd smd t lbrm st psm",
+                "output": "Mnd"
+            },
+            {
+                "name": "1 word",
+                "input": "nothing",
+                "output": "nothing"
+            },
+            {
+                "name": "nothing",
+                "input": "",
+                "output": ""
+            }
+        ]
+    }
+}
