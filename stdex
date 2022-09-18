@@ -1,0 +1,73 @@
+#!/usr/bin/env python3
+# PYTHON_ARGCOMPLETE_OK
+"""
+Docker runner for the C++ exercise.
+"""
+
+import argparse
+import os
+import subprocess
+import sys
+
+try:
+    import argcomplete
+except ImportError:
+    pass
+
+DOCKER_NAME = 'cpp-ex'
+STAGE_NAMES = [f'stage{i}' for i in range(1, 6)]
+
+DOCKER_CMD_BASE = [
+    'docker', 'run', '--rm', '-t',
+    '--network', 'none',
+    '-u', f'{os.getuid()}:{os.getgid()}',
+    '-v', f'{os.getcwd()}:/host',
+    '-v', '/etc/passwd:/etc/passwd:ro',
+    '-v', '/etc/group:/etc/group:ro',
+    '-v', '/etc/shadow:/etc/shadow:ro',
+    '-w', '/host',
+    DOCKER_NAME
+]
+
+def run(*args):
+    """
+    Run the exercise docker with `args`.
+    """
+    return subprocess.call(DOCKER_CMD_BASE + list(args))
+
+
+def _build_parser():
+    parser = argparse.ArgumentParser(description="manages the C++ exercise")
+    subparsers = parser.add_subparsers(dest='command', help="generate the base template for the given stage")
+
+    generate = subparsers.add_parser('generate', help="generate the base template for the given stage")
+    generate.add_argument('stage', metavar='stage', choices=STAGE_NAMES, help="the stage to generate")
+    generate.add_argument('-o', '--output', help="the output for the generator (default: ./{stage}.cpp)")
+
+    test = subparsers.add_parser('test', help="run the tests on the given stage. note: this does not compile the stage")
+    test.add_argument('stage', metavar='stage', choices=STAGE_NAMES, help="the stage to test")
+
+    build = subparsers.add_parser('compile', help="compile the given file")
+    build.add_argument('source_file', help="the file to compile")
+
+    subparsers.add_parser('list', help="list the available stages")
+
+    check = subparsers.add_parser('verify', help="check the given stage by compiling and running the tests")
+    check.add_argument('stage', metavar='stage', choices=STAGE_NAMES, help="the stage to check")
+
+    subparsers.add_parser('start', help="start the exercise")
+
+    return parser
+
+def _main():
+    parser = _build_parser()
+
+    if 'argcomplete' in sys.modules:
+        argcomplete.autocomplete(parser)
+
+    parser.parse_args()
+
+    return run(*sys.argv[1:])
+
+if __name__ == '__main__':
+    _main()
