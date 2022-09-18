@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+set -x
+cd "$(dirname "$(readlink -f "$BASH_SOURCE")")" &&
+docker build -t cpp-ex -f Dockerfile .

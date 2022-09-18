@@ -1,0 +1,41 @@
+#from itertools import chain
+#from textwrap import wrap
+#def comment(*paragraphs):
+    #for paragraph in paragraphs:
+        #if isinstance(paragraph, tuple):
+            #set prefix, paragraph = paragraph
+            #set padding = ' ' * len(prefix)
+        #else
+            #set prefix = padding = ''
+        #end if
+        #if '\n' in paragraph
+$('\n'.join(wrap(prefix, initial_indent='// ')))
+            #for line in paragraph.split('\n')
+$('\n'.join(wrap(line, initial_indent='// ' + padding, subsequent_indent='// ' + padding)))
+            #end for
+        #else
+$('\n'.join(wrap(paragraph, initial_indent='// ' + prefix, subsequent_indent='// ' + padding)))
+        #end if
+    #end for
+#end def
+#for header in sorted(set($includes) | {'iostream', 'iterator'}):
+\#include <$header>
+#end for
+
+using namespace std;
+
+$comment($desc, *chain(*(('Example: ', ('  Input: ', $example['input']), (' Output: ', $example['output'])) for $example in $test_cases[:$examples])))
+
+$comment('NOTE: You can print to stderr (using `cerr`) for debug prints')
+
+int main()
+{
+    // Read input
+    $container_type $container_name{istream_iterator<$element_type>{cin}, istream_iterator<$element_type>{}};
+
+    // Your code goes here
+    /* code */
+
+    // Print your result instead of "answer"
+    cout << "answer" << endl;
+}
